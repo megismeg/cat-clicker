@@ -1,0 +1,49 @@
+h1 {
+    text-align: center;
+}
+
+div.blurred {
+    opacity: 0.3;
+}
+
+div.container {
+    position: relative;
+    width: 800px;
+    margin: auto;  
+}
+div.sidebar {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    height: 100%;
+}
+
+div.sidebar a {
+    display: block;
+    text-decoration: none;
+    padding: 10px 30px;
+    color: black;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+div.sidebar a.selected, div.sidebar a:hover {
+    background-color: darkgray;
+    color: white;
+    border-radius: 4px;
+}
+
+div.sidebar a.btn {
+    font-size: 18px;
+}
+
+div.sidebar a.btn:hover {
+    border: 1px solid darkgray;
+    background-color: lightgray;
+    color: black;
+    font-size: 20px;
+}

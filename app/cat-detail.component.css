@@ -1,0 +1,14 @@
+p {
+    text-align: center;
+}
+
+.cat-wrapper {
+    position: absolute;
+    left: 220px;
+    top: 0;
+    border: 1px solid black;
+}
+
+img {
+    width: 500px;
+}

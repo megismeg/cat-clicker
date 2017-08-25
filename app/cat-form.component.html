@@ -1,0 +1,19 @@
+<div class="form-wrapper">
+  <form #catForm="ngForm" (ngSubmit)="add()">
+    <div class="form-group">
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" required [(ngModel)]="catName"
+       #name="ngModel" placeholder="cat's name">
+        <div [hidden]="name.valid || name.untouched" class="alert">Name is required.</div>
+    </div>
+    <div class="form-group">
+        <label for="url">Image Url: </label>
+        <input type="text" [(ngModel)]="imageUrl" id="url" name="url" required #url="ngModel" placeholder="image's url">
+        <div [hidden]="url.valid || url.untouched" class="alert">Image's URL is required.</div>
+    </div>
+    <div class="form-group">
+        <button (click)="cancel()">Cancel</button>
+        <button type="submit" [disabled]="!catForm.form.valid">Add</button>
+    </div>
+  </form>
+</div>
