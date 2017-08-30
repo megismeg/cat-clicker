@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Cat } from './cat.service';
+import { Cat, CatService } from './cat.service';
 
 @Component({
   selector: 'cat-detail',
@@ -8,7 +8,11 @@ import { Cat } from './cat.service';
   styleUrls: ['./cat-detail.component.css']
 })
 export class CatDetailComponent {
-  @Input() cat: Cat;
+  cat: Cat;
+  
+  constructor(private catService: CatService) {
+    catService.currentCat$.subscribe(cat => this.cat = cat);
+  }
   
   clickCat() {
     this.cat.clickedNum ++;

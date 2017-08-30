@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 export class Cat {
   constructor(
@@ -25,6 +26,12 @@ export class CatService {
   
   cats = Promise.resolve(cats);
   
+  private currentCat = new Subject<Cat>();
+  currentCat$ = this.currentCat.asObservable();
+  
+  private newCatName = new Subject<string>();
+  newCatName$ = this.newCatName.asObservable();
+  
   getCatsName(): string[] {
     let catName = [];
     this.cats.then(cats => cats.forEach(cat => catName.push(cat.name)));
@@ -35,6 +42,10 @@ export class CatService {
     return this.cats.then(cats => cats.find((cat: Cat) => cat.name === name));
   }
   
+  selectCat(name: string) {
+    this.getCat(name).then(cat => this.currentCat.next(cat));
+  }
+  
   addCat(name: string, imageUrl: string) {
     this.cats.then(cats => cats.push(
       new Cat(
@@ -43,5 +54,6 @@ export class CatService {
         imageUrl,
         0)
     ));
+    this.newCatName.next(name);
   }
 }

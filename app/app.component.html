@@ -2,10 +2,10 @@
 <hr>
 <div class="container" [class.blurred]="isAddingNewCat">
   <div class="sidebar">
-    <a *ngFor="let catName of catsName" (click)="selectCat(catName)" [class.selected]="catName === selectedCat.name">{{catName}}</a>
+    <a *ngFor="let catName of catsName" (click)="selectCat(catName)" [class.selected]="catName === selectedCatName">{{catName}}</a>
     <a class="btn" (click)="isAddingNewCat=true">+ add a new cat</a>
   </div>
-  <cat-detail [cat]="selectedCat"></cat-detail>
+  <cat-detail></cat-detail>
 </div>
 
 <cat-form *ngIf="isAddingNewCat" (onClose)="closeCatForm($event)"></cat-form>

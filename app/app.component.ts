@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Cat, CatService } from './cat.service';
 
@@ -7,15 +7,19 @@ import { Cat, CatService } from './cat.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Cat Clicker';
   catsName: string[];
-  selectedCat: Cat;
-  // this flag is used to show or hide the 'cat-form' component.
+  selectedCatName: string;
   isAddingNewCat: boolean;
   
   constructor(private catService: CatService) {
-    this.selectCat('Dolly');
+    this.selectedCatName = 'Dolly';
+    this.catService.newCatName$.subscribe(catName => this.catsName.push(catName));
+  }
+  
+  ngOnInit() {
+    this.selectCat(this.selectedCatName);
     this.updateCatsName();
   }
   
@@ -24,12 +28,14 @@ export class AppComponent {
   }
   
   selectCat(name: string) {
-    this.catService.getCat(name).then(cat => this.selectedCat = cat);
+    this.selectedCatName = name;
+    this.catService.selectCat(name);
   }
   
   closeCatForm($event: string) {
-    this.selectCat($event ? $event : this.selectedCat.name);
-    this.updateCatsName();
     this.isAddingNewCat = false;
-  }  
+    if ($event) {
+      this.selectCat($event);
+    }
+  } 
 }
